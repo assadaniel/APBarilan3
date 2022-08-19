@@ -5,7 +5,7 @@
 #ifndef T1_IRISCOMP_HPP
 #define T1_IRISCOMP_HPP
 
-#include "Iris.hpp"
+#include "Iris/Iris.hpp"
 class IrisComp {
 private:
     Iris iris;

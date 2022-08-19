@@ -5,7 +5,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
-#include "Iris.hpp"
+#include "Iris/Iris.hpp"
 
 #ifndef T1_IRISREADER_HPP
 #define T1_IRISREADER_HPP

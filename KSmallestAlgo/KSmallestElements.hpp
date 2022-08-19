@@ -1,7 +1,7 @@
 
 #ifndef T1_KSmallestElements_HPP
 #define T1_KSmallestElements_HPP
-#include "IrisComp.hpp"
+#include "Iris/IrisComp.hpp"
 #include <vector>
 #include <map>
 

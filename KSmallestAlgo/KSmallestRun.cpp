@@ -3,8 +3,8 @@
 //
 
 #include "KSmallestRun.h"
-#include "IrisReader.hpp"
-#include "KSmallestElements.hpp"
+#include "Iris/IrisReader.hpp"
+#include "KSmallestAlgo/KSmallestElements.hpp"
 
 /**
  * @brief Running the K Smallest Elements function om multiple objects and using it to classifie the irises.

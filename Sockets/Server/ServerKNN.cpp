@@ -1,6 +1,6 @@
 
-#include "SocketFileServer.h"
-#include "KSmallestRun.h"
+#include "Sockets/Server/SocketFileServer.h"
+#include "KSmallestAlgo/KSmallestRun.h"
 
 //
 // Created by User on 10/08/2022.
