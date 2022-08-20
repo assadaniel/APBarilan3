@@ -22,7 +22,28 @@ void SocketFile::receiveFile(std::fstream &file_s) {
         std :: cout << "Received " << data << " bytes." << std::endl;
     }
 
+
 }
+
+std::string SocketFile::read() {
+    char buffer[CHUNK_SIZE];
+    size_t data;
+    data = recv(client_sock, buffer, CHUNK_SIZE, 0);
+    if (data < 0) {
+        std::cout << "Server : Error reading." << std::endl;
+    }
+    std::string s(buffer);
+    return s;
+}
+
+void SocketFile::write(std::string str) {
+    int sent = send(client_sock, str.c_str(), str.length(), 0);
+    if (sent < 0) {
+        std::cout << "Server : Error sending file." << std::endl;
+    }
+}
+
+
 
 /**
  * @brief Sending a file.

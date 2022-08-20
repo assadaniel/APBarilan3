@@ -12,6 +12,8 @@ class DefaultIO {
 public:
     virtual std::string read() = 0;
     virtual void write(std::string str) = 0;
+    virtual void receiveFile(std::fstream& file_s) = 0; // empty file stream
+    virtual void sendFile(std::fstream& file_s, long file_size) = 0; //full file stream
     virtual ~DefaultIO();
 };
 

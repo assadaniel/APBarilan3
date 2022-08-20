@@ -12,6 +12,8 @@ class Context {
 private:
     int k;
     std::string distance_metric;
+    std::string path_to_train;
+    std::string path_to_test;
 public:
     int getK() const;
 
@@ -20,6 +22,14 @@ public:
     const std::string &getDistanceMetric() const;
 
     void setDistanceMetric(const std::string &distanceMetric);
+
+    const std::string &getPathToTrain() const;
+
+    void setPathToTrain(const std::string &pathToTrain);
+
+    const std::string &getPathToTest() const;
+
+    void setPathToTest(const std::string &pathToTest);
 
 };
 

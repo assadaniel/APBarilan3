@@ -19,3 +19,19 @@ const std::string &Context::getDistanceMetric() const {
 void Context::setDistanceMetric(const std::string &distanceMetric) {
     distance_metric = distanceMetric;
 }
+
+const std::string &Context::getPathToTrain() const {
+    return path_to_train;
+}
+
+void Context::setPathToTrain(const std::string &pathToTrain) {
+    path_to_train = pathToTrain;
+}
+
+const std::string &Context::getPathToTest() const {
+    return path_to_test;
+}
+
+void Context::setPathToTest(const std::string &pathToTest) {
+    path_to_test = pathToTest;
+}

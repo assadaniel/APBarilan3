@@ -29,15 +29,17 @@ SocketFileServer::SocketFileServer( const int port_no) : port_no(port_no) {
     if (listen(sock, 5) < 0) {
         perror("error listening to a socket");
     }
-    struct sockaddr_in client_sin;
+
+}
+
+void SocketFileServer::accept() {
     unsigned int addr_len = sizeof(client_sin);
-    int cs = accept(sock, (struct sockaddr *) &client_sin, &addr_len);
+    int cs = ::accept(server_sock, (struct sockaddr *) &client_sin, &addr_len);
     setClientSock(cs);
 
     if (cs < 0) {
         perror("error accepting client");
     }
-
 }
 
 /**

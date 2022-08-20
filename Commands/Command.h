@@ -12,12 +12,12 @@
 
 class Command {
 private:
-    std::string description; // description in the menu.
-    std::string instruction; // the message shown after the command is chosen.
     Context ctx;
     DefaultIO* dio;
 protected:
-    Context &getCtx() const;
+    std::string description; // description in the menu.
+    std::string instruction; // the message shown after the command is chosen.
+    Context &getCtx();
 
     DefaultIO *getDio() const;
 public:

@@ -13,12 +13,13 @@ class SocketFileServer : public SocketFile {
 private:
     const int port_no;
     int server_sock;
+    struct sockaddr_in client_sin;
 public:
     explicit SocketFileServer(int port_no);
 
     void setServerSock(int serverSock);
-
-    void close();
+    void accept();
+    void close() override;
 };
 
 

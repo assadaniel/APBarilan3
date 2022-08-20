@@ -5,15 +5,41 @@
 #include <sstream>
 #include "AlgoSettings.h"
 
-AlgoSettings::AlgoSettings(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {}
+AlgoSettings::AlgoSettings(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
+    instruction = "The current KNN parameters are: K = "+ std::to_string(ctx.getK())
+                  +", distance metric = "+ctx.getDistanceMetric();
+    description = "algorithm settings";
+}
 
 void AlgoSettings::execute() {
-    std::string param = getDio()->read();
+    Context& context = getCtx();
+    DefaultIO* defaultIo = getDio();
+    getDio()->write(instruction);
+    std::string param = defaultIo->read();
+    if(param == "\n") {
+        return;
+    }
     std::stringstream ss(param);
     int k;
     std::string metric;
     ss >> k >> metric;
-    getCtx().setK(k);
-    getCtx().setDistanceMetric(metric);
+    if(k<1 || k>10) {
+        defaultIo->write("Invalid k argument, k must be an integer between 1 and 10.");
+        return;
+    }
+    if(metric!="EUC" || metric!="MAN" || metric!="CHE") {
+        defaultIo->write("Invalid distance metric, the metric must be EUC, MAN or CHE.");
+        return;
+    }
+    context.setK(k);
+    context.setDistanceMetric(metric);
+    refreshInstruction();
 
+
+}
+
+void AlgoSettings::refreshInstruction() {
+    Context& ctx = getCtx();
+    instruction = "The current KNN parameters are: K = "+ std::to_string(ctx.getK())
+                  +", distance metric = "+ctx.getDistanceMetric();
 }

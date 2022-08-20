@@ -12,6 +12,7 @@ class AlgoSettings : public Command {
 public:
     AlgoSettings(Context& ctx, DefaultIO &dio);
     void execute() override;
+    void refreshInstruction();
 };
 
 

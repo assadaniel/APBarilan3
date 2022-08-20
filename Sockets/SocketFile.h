@@ -13,18 +13,21 @@
 #include <unistd.h>
 #include <cstring>
 #include <fstream>
+#include "DefaultIO.h"
 
-class SocketFile {
+class SocketFile : DefaultIO {
 private:
     int client_sock;
 public:
     virtual ~SocketFile();
-    virtual void receiveFile(std::fstream& file_s); // empty file stream
-    virtual void sendFile(std::fstream& file_s, long file_size); //full file stream
+    void receiveFile(std::fstream& file_s) override; // empty file stream
+    void sendFile(std::fstream& file_s, long file_size) override; //full file stream
     virtual void close() = 0;
-    void setClientSock(int clientSock);
     static long getFileSize(const std::string &filename);
+    std::string read();
+    void write(std::string str);
 protected:
+    void setClientSock(int clientSock);
     int getClientSock() const;
 
 };

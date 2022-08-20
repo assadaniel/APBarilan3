@@ -26,7 +26,7 @@ const std::string &Command::getInstruction() const {
     return instruction;
 }
 
-const Context &Command::getCtx() const {
+Context &Command::getCtx() {
     return ctx;
 }
 
