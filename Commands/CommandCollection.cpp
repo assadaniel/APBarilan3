@@ -4,17 +4,20 @@
 
 #include "CommandCollection.h"
 
-void CommandCollection::addCommand(Command *command) {
-    commands.push_back(command);
+#include <utility>
+#include <iostream>
+
+void CommandCollection::addCommand(const std::string& string) {
+    commands.push_back(commandFactory.createCommand(string));
 }
 
 void CommandCollection::printMenu() {
     std::string menu = "Welcome to the KNN Classifier Server. Please choose an option:\n";
     for (int i = 0; i < commands.size(); i++) {
-        menu+=std::to_string(i+1)+". "+commands.at(i)->getDescription()+"\n";
+        menu += std::to_string(i + 1) + ". " + commands.at(i)->getDescription() + "\n";
     }
-    menu+="8. exit\n";
-    defaultIo->write(menu);
+    menu += std::to_string(commands.size()+1) + ". exit";
+    defaultIo.write(menu);
 }
 
 void CommandCollection::executeAt(int i) {
@@ -22,11 +25,14 @@ void CommandCollection::executeAt(int i) {
 }
 
 CommandCollection::~CommandCollection() {
-    for (Command *c: commands) {
-        delete c;
-    }
 }
 
-void CommandCollection::setDefaultIo(DefaultIO *defaultIo) {
-    CommandCollection::defaultIo = defaultIo;
+
+CommandCollection::CommandCollection(DefaultIO &dio, Context &ctx) :
+        defaultIo(dio), ctx(ctx), commandFactory(ctx, dio) {
+
+}
+
+size_t CommandCollection::size() {
+    return commands.size();
 }

@@ -13,13 +13,13 @@
 class Command {
 private:
     Context ctx;
-    DefaultIO* dio;
+    DefaultIO& dio;
 protected:
     std::string description; // description in the menu.
     std::string instruction; // the message shown after the command is chosen.
     Context &getCtx();
 
-    DefaultIO *getDio() const;
+    DefaultIO &getDio() const;
 public:
     Command(Context& ctx, DefaultIO &dio);
     virtual void execute() = 0;

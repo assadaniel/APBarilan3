@@ -4,14 +4,14 @@
 #define CHUNK_SIZE 512
 
 #include <sys/stat.h>
-#include "SocketFile.h"
+#include "SocketIO.h"
 
 /**
  * @brief Reciving a file in parts and writing it into the fstream file_s.
  * 
  * @param file_s The fstream we write to.
  */
-void SocketFile::receiveFile(std::fstream &file_s) {
+void SocketIO::receiveFile(std::fstream &file_s) {
     char buffer[CHUNK_SIZE];
     size_t data;
     data = recv(client_sock, buffer, CHUNK_SIZE, 0);
@@ -25,19 +25,23 @@ void SocketFile::receiveFile(std::fstream &file_s) {
 
 }
 
-std::string SocketFile::read() {
+std::string SocketIO::read() {
     char buffer[CHUNK_SIZE];
     size_t data;
-    data = recv(client_sock, buffer, CHUNK_SIZE, 0);
+    data = recv(client_sock, buffer, sizeof(buffer), 0);
     if (data < 0) {
         std::cout << "Server : Error reading." << std::endl;
+    }
+    if (data == 0) {
+        std::cout << "Entered" << std::endl;
+        return "";
     }
     std::string s(buffer);
     return s;
 }
 
-void SocketFile::write(std::string str) {
-    int sent = send(client_sock, str.c_str(), str.length(), 0);
+void SocketIO::write(std::string str) {
+    int sent = send(client_sock, str.data(), str.size(), 0);
     if (sent < 0) {
         std::cout << "Server : Error sending file." << std::endl;
     }
@@ -51,7 +55,7 @@ void SocketFile::write(std::string str) {
  * @param file_s The fstream we send from.
  * @param file_size The size of the file we want to send.
  */
-void SocketFile::sendFile(std::fstream &file_s, long file_size) {
+void SocketIO::sendFile(std::fstream &file_s, long file_size) {
     size_t sent = 0;
     std::string line;
     char buffer[CHUNK_SIZE];
@@ -69,7 +73,7 @@ void SocketFile::sendFile(std::fstream &file_s, long file_size) {
  * 
  * @param clientSock The client socket number.
  */
-void SocketFile::setClientSock(int clientSock) {
+void SocketIO::setClientSock(int clientSock) {
     client_sock = clientSock;
 }
 
@@ -77,14 +81,14 @@ void SocketFile::setClientSock(int clientSock) {
  * @brief Destroy the Socket File:: Socket File object
  * 
  */
-SocketFile::~SocketFile() = default;
+SocketIO::~SocketIO() = default;
 
 /**
  * @brief Getting the client socket number.
  * 
  * @return The client socket number.
  */
-int SocketFile::getClientSock() const {
+int SocketIO::getClientSock() const {
     return client_sock;
 }
 
@@ -95,8 +99,12 @@ int SocketFile::getClientSock() const {
  * @param filename The name of the file we get the size of.
  * @return The size of the file.
  */
-long SocketFile::getFileSize(const std::string &filename) {
+long SocketIO::getFileSize(const std::string &filename) {
     struct stat stat_buf{};
     int rc = stat(filename.c_str(), &stat_buf);
     return rc == 0 ? stat_buf.st_size : -1;
+}
+
+SocketIO::SocketIO(int client_sock) : client_sock(client_sock) {
+
 }

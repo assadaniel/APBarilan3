@@ -8,17 +8,20 @@
 
 #include <vector>
 #include "Command.h"
+#include "CommandFactory.h"
 
 class CommandCollection {
 private:
     std::vector<Command*> commands;
-    DefaultIO *defaultIo;
+    DefaultIO &defaultIo;
+    CommandFactory commandFactory;
+    Context& ctx;
 public:
-    void addCommand(Command* command);
+    CommandCollection(DefaultIO& dio, Context& ctx);
+    void addCommand(const std::string& string);
     void executeAt(int i);
     void printMenu();
-
-    void setDefaultIo(DefaultIO *defaultIo);
+    size_t size();
 
     ~CommandCollection();
 };

@@ -10,7 +10,7 @@
  * @brief The main function of the server.
  * 
  */
-int main() {
+int mainn() {
     // Create socket
     int port_no = 5555;
     SocketFileServer SFS(port_no);

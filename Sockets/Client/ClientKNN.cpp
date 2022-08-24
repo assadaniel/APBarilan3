@@ -10,7 +10,7 @@
  * 
  * @param argv The path to the unclassified the client want to send and the path to where to save the classified file.
  */
-int main(int argc, char **argv) {
+int mainn(int argc, char **argv) {
     if(argc < 2) {
         std::cout << "Must provide paths for unclassified file and classified file." << std::endl;
     }

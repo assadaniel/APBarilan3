@@ -9,12 +9,17 @@
 #include <string>
 
 class DefaultIO {
+private:
+    std::string endString = "$";
 public:
     virtual std::string read() = 0;
     virtual void write(std::string str) = 0;
     virtual void receiveFile(std::fstream& file_s) = 0; // empty file stream
     virtual void sendFile(std::fstream& file_s, long file_size) = 0; //full file stream
+    void writeEndString();
     virtual ~DefaultIO();
+
+    const std::string &getEndString() const;
 };
 
 

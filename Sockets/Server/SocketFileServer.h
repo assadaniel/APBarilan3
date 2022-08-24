@@ -6,10 +6,10 @@
 #define APBARILAN2_SOCKETFILESERVER_H
 
 
-#include "Sockets/SocketFile.h"
+#include "Sockets/SocketIO.h"
 
 
-class SocketFileServer : public SocketFile {
+class SocketFileServer {
 private:
     const int port_no;
     int server_sock;
@@ -18,8 +18,8 @@ public:
     explicit SocketFileServer(int port_no);
 
     void setServerSock(int serverSock);
-    void accept();
-    void close() override;
+    int accept();
+    void close();
 };
 
 

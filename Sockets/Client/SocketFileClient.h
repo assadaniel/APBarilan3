@@ -6,15 +6,21 @@
 #define APBARILAN2_SOCKETFILECLIENT_H
 
 
-#include "Sockets/SocketFile.h"
+#include "../SocketIO.h"
 
-class SocketFileClient : public SocketFile {
+
+class SocketFileClient{
 private:
     const char* ip_address;
     const int port_no;
+    int client_sock;
 public:
     SocketFileClient(const char* ip_address, int port_no);
-    void close() override;
+    void close();
+
+    int getClientSock() const;
+
+    void setClientSock(int clientSock);
 
 };
 

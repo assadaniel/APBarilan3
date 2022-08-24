@@ -4,19 +4,17 @@
 
 #include "Command.h"
 
-Command::~Command() {
-    delete dio;
-}
+
 
 void Command::printDesc() {
-    dio->write(description);
+    dio.write(description);
 }
 
 void Command::printInst() {
-    dio->write(instruction);
+    dio.write(instruction);
 }
 
-Command::Command(Context& ctx, DefaultIO& dio): ctx(ctx), dio(&dio) {}
+Command::Command(Context& ctx, DefaultIO& dio): ctx(ctx), dio(dio) {}
 
 const std::string &Command::getDescription() const {
     return description;
@@ -30,7 +28,11 @@ Context &Command::getCtx() {
     return ctx;
 }
 
-DefaultIO *Command::getDio() const {
+DefaultIO &Command::getDio() const {
     return dio;
+}
+
+Command::~Command() {
+
 }
 

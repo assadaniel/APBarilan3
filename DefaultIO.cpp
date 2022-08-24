@@ -7,3 +7,11 @@
 DefaultIO::~DefaultIO() {
 
 }
+
+void DefaultIO::writeEndString() {
+    write(endString);
+}
+
+const std::string &DefaultIO::getEndString() const {
+    return endString;
+}

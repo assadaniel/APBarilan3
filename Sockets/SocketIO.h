@@ -15,17 +15,17 @@
 #include <fstream>
 #include "DefaultIO.h"
 
-class SocketFile : DefaultIO {
+class SocketIO : public DefaultIO {
 private:
     int client_sock;
 public:
-    virtual ~SocketFile();
+    SocketIO(int client_sock);
+    virtual ~SocketIO();
     void receiveFile(std::fstream& file_s) override; // empty file stream
     void sendFile(std::fstream& file_s, long file_size) override; //full file stream
-    virtual void close() = 0;
     static long getFileSize(const std::string &filename);
-    std::string read();
-    void write(std::string str);
+    std::string read() override;
+    void write(std::string str) override;
 protected:
     void setClientSock(int clientSock);
     int getClientSock() const;

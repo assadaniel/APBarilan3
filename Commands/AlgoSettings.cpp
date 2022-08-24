@@ -3,6 +3,7 @@
 //
 
 #include <sstream>
+#include <iostream>
 #include "AlgoSettings.h"
 
 AlgoSettings::AlgoSettings(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
@@ -12,29 +13,37 @@ AlgoSettings::AlgoSettings(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
 }
 
 void AlgoSettings::execute() {
+    std::cout << "1" << std::endl;
     Context& context = getCtx();
-    DefaultIO* defaultIo = getDio();
-    getDio()->write(instruction);
-    std::string param = defaultIo->read();
-    if(param == "\n") {
+    std::cout << "2" << std::endl;
+    DefaultIO& defaultIo = getDio();
+    std::cout << "3" << std::endl;
+    defaultIo.write(instruction);
+    std::cout << "4" << std::endl;
+    std::string param = defaultIo.read();
+    std::cout << "param is " << param << std::endl;
+    if(param.empty()) {
+        std::cout << "is empty." << std::endl;
         return;
     }
     std::stringstream ss(param);
     int k;
     std::string metric;
     ss >> k >> metric;
+    std::cout << k << metric << std::endl;
     if(k<1 || k>10) {
-        defaultIo->write("Invalid k argument, k must be an integer between 1 and 10.");
+        defaultIo.write("Invalid k argument, k must be an integer between 1 and 10.");
         return;
     }
-    if(metric!="EUC" || metric!="MAN" || metric!="CHE") {
-        defaultIo->write("Invalid distance metric, the metric must be EUC, MAN or CHE.");
+    if(metric!="EUC" && metric!="MAN" && metric!="CHE") {
+        defaultIo.write("Invalid distance metric, the metric must be EUC, MAN or CHE.");
         return;
     }
     context.setK(k);
     context.setDistanceMetric(metric);
+    std::cout << "Contents set." << std::endl;
     refreshInstruction();
-
+    defaultIo.writeEndString();
 
 }
 

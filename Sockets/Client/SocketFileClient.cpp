@@ -38,3 +38,11 @@ SocketFileClient::SocketFileClient(const char *ip_address, const int port_no) :
 void SocketFileClient::close() {
     ::close(getClientSock());
 }
+
+int SocketFileClient::getClientSock() const {
+    return client_sock;
+}
+
+void SocketFileClient::setClientSock(int clientSock) {
+    client_sock = clientSock;
+}

@@ -32,14 +32,13 @@ SocketFileServer::SocketFileServer( const int port_no) : port_no(port_no) {
 
 }
 
-void SocketFileServer::accept() {
+int SocketFileServer::accept() {
     unsigned int addr_len = sizeof(client_sin);
     int cs = ::accept(server_sock, (struct sockaddr *) &client_sin, &addr_len);
-    setClientSock(cs);
-
     if (cs < 0) {
         perror("error accepting client");
     }
+    return cs;
 }
 
 /**
