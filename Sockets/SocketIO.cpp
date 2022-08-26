@@ -26,24 +26,31 @@ void SocketIO::receiveFile(std::fstream &file_s) {
 }
 
 std::string SocketIO::read() {
+
     char buffer[CHUNK_SIZE];
     size_t data;
-    data = recv(client_sock, buffer, sizeof(buffer), 0);
+    int ret;
+    receive_int(&ret);
+    ret = ntohl(ret);
+    if (ret == 0) {
+        return "";
+    }
+    data = recv(client_sock, buffer, ret, 0);
     if (data < 0) {
         std::cout << "Server : Error reading." << std::endl;
     }
     if (data == 0) {
-        std::cout << "Entered" << std::endl;
         return "";
     }
-    std::string s(buffer);
+    std::string s(buffer, buffer+data);
     return s;
 }
 
 void SocketIO::write(std::string str) {
+    send_int(str.size());
     int sent = send(client_sock, str.data(), str.size(), 0);
     if (sent < 0) {
-        std::cout << "Server : Error sending file." << std::endl;
+        std::cout << "Server : Error sending message." << std::endl;
     }
 }
 
@@ -107,4 +114,50 @@ long SocketIO::getFileSize(const std::string &filename) {
 
 SocketIO::SocketIO(int client_sock) : client_sock(client_sock) {
 
+}
+
+
+
+//FROM STACK OVERFLOW : https://stackoverflow.com/questions/9140409/transfer-integer-over-a-socket-in-c
+int SocketIO::send_int(int num) const
+{
+    int32_t conv = htonl(num);
+    char *data = (char*)&conv;
+    int left = sizeof(conv);
+    int rc;
+    do {
+        rc = send(client_sock, data, left, 0);
+        if (rc < 0) {
+            std::cout << "Error sending size." << std::endl;
+            return -1;
+        }
+        else {
+            data += rc;
+            left -= rc;
+        }
+    }
+    while (left > 0);
+    return 0;
+}
+
+int SocketIO::receive_int(int *num) const
+{
+    int32_t ret;
+    char *data = (char*)&ret;
+    int left = sizeof(ret);
+    int rc;
+    do {
+        rc = recv(client_sock, data, left, 0);
+        if (rc <= 0) {
+            std::cout << "Error reading size." << std::endl;
+            return -1;
+        }
+        else {
+            data += rc;
+            left -= rc;
+        }
+    }
+    while (left > 0);
+    *num = ntohl(ret);
+    return 0;
 }

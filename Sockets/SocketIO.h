@@ -26,6 +26,8 @@ public:
     static long getFileSize(const std::string &filename);
     std::string read() override;
     void write(std::string str) override;
+    int send_int(int num) const;
+    int receive_int(int *num) const;
 protected:
     void setClientSock(int clientSock);
     int getClientSock() const;
