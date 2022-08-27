@@ -20,5 +20,6 @@ void CLI::start() {
         commandCollection.printMenu();
         option = stoi(dio.read());
     }
-
+    dio.write("Exiting!");
+    pthread_exit(0);
 }

@@ -25,6 +25,9 @@ void CommandCollection::executeAt(int i) {
 }
 
 CommandCollection::~CommandCollection() {
+    for(Command* c : commands) {
+        delete c;
+    }
 }
 
 

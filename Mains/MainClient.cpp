@@ -31,7 +31,8 @@ int main() {
                 break;
             }
             default: {
-                sIO.write(std::to_string(value));
+                std::cout << sIO.read() << std::endl;
+                exit(0);
             }
 
 

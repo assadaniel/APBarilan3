@@ -88,7 +88,9 @@ void SocketIO::setClientSock(int clientSock) {
  * @brief Destroy the Socket File:: Socket File object
  * 
  */
-SocketIO::~SocketIO() = default;
+SocketIO::~SocketIO() {
+    close();
+};
 
 /**
  * @brief Getting the client socket number.
@@ -160,4 +162,8 @@ int SocketIO::receive_int(int *num) const
     while (left > 0);
     *num = ntohl(ret);
     return 0;
+}
+
+void SocketIO::close() {
+    ::close(client_sock);
 }

@@ -28,6 +28,7 @@ public:
     void write(std::string str) override;
     int send_int(int num) const;
     int receive_int(int *num) const;
+    void close();
 protected:
     void setClientSock(int clientSock);
     int getClientSock() const;

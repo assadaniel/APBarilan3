@@ -12,12 +12,13 @@
 
 class CLI {
 private:
-    DefaultIO& dio;
+    DefaultIO&  dio;
     Context ctx;
     CommandCollection commandCollection;
 public:
     CLI(DefaultIO& dio);
     void start();
+
 };
 
 
