@@ -27,7 +27,6 @@ ThreadCLI::ThreadCLI(DefaultIO& dio):  dio(dio), cli(dio), _thread(), attr() {
 
 ThreadCLI::~ThreadCLI() {
     if(valid) {
-        std::cout << "Waiting" << std::endl;
         pthread_join(_thread, NULL);
         valid = false;
     }
