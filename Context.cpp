@@ -35,3 +35,11 @@ const std::string &Context::getPathToTest() const {
 void Context::setPathToTest(const std::string &pathToTest) {
     path_to_test = pathToTest;
 }
+
+std::string &Context::getClassifyName() {
+    return classify_file_name;
+}
+
+void Context::setClassifyName(std::string &classifiedName){
+    classify_file_name = classifiedName;
+}

@@ -14,6 +14,7 @@ private:
     std::string distance_metric;
     std::string path_to_train;
     std::string path_to_test;
+    std::string classify_file_name;
 public:
     int getK() const;
 
@@ -31,6 +32,9 @@ public:
 
     void setPathToTest(const std::string &pathToTest);
 
+    std::string &getClassifyName();
+
+    void setClassifyName(std::string &classifiedName);
 };
 
 
