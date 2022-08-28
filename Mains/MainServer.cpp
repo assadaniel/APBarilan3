@@ -7,12 +7,6 @@
 //
 
 
-void* runner(void* param) {
-    int client = *reinterpret_cast<int*>(param);
-    SocketIO sIO(client);
-    CLI cli(sIO);
-    cli.start();
-}
 int main() {
     int port = 7777;
     SocketFileServer SFS(port);
