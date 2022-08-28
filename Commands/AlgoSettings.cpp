@@ -19,7 +19,6 @@ void AlgoSettings::execute() {
     std::string param = defaultIo.read();
     if(param.empty()) {
         std::cout << "Empty" << std::endl;
-        defaultIo.writeEndString();
         return;
     }
     std::stringstream ss(param);
@@ -33,13 +32,11 @@ void AlgoSettings::execute() {
     }
     if(metric!="EUC" && metric!="MAN" && metric!="CHE") {
         defaultIo.write("Invalid distance metric, the metric must be EUC, MAN or CHE.");
-        defaultIo.writeEndString();
         return;
     }
     context.setK(k);
     context.setDistanceMetric(metric);
     refreshInstruction();
-    defaultIo.writeEndString();
 
 }
 

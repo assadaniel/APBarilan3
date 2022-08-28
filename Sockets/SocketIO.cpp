@@ -13,8 +13,10 @@
  */
 void SocketIO::receiveFile(std::fstream &file_s) {
     char buffer[CHUNK_SIZE];
+    int ret;
+    receive_int(&ret);
     size_t data;
-    data = recv(client_sock, buffer, CHUNK_SIZE, 0);
+    data = recv(client_sock, buffer, ret, 0);
     file_s.write(buffer, data);
     if (data < 0) {
         std::cout << "Server : Error receiving file." << std::endl;
@@ -31,7 +33,6 @@ std::string SocketIO::read() {
     size_t data;
     int ret;
     receive_int(&ret);
-    ret = ntohl(ret);
     if (ret == 0) {
         return "";
     }
@@ -65,6 +66,7 @@ void SocketIO::write(std::string str) {
 void SocketIO::sendFile(std::fstream &file_s, long file_size) {
     size_t sent = 0;
     std::string line;
+    send_int(file_size);
     char buffer[CHUNK_SIZE];
     file_s.read(buffer, file_size);
     sent = send(client_sock, buffer, file_size, 0);

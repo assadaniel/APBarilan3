@@ -9,6 +9,7 @@
 CLI::CLI(DefaultIO& dio): ctx() ,dio(dio), commandCollection(dio,ctx) {
     ctx.setK(5);
     ctx.setDistanceMetric("EUC");
+    commandCollection.addCommand("UploadUnclassified");
     commandCollection.addCommand("AlgoSettings");
 }
 void CLI::start() {
@@ -20,6 +21,6 @@ void CLI::start() {
         commandCollection.printMenu();
         option = stoi(dio.read());
     }
-    dio.write("Exiting!");
+    dio.write("EX");
     pthread_exit(0);
 }
