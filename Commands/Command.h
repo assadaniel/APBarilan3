@@ -12,7 +12,7 @@
 
 class Command {
 private:
-    Context ctx;
+    Context& ctx;
     DefaultIO& dio;
 protected:
     std::string description; // description in the menu.

@@ -3,27 +3,29 @@
 #include <fstream>
 #include "DownloadResult.h"
 #include "Sockets/SocketIO.h"
+
 DownloadResult::DownloadResult(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
     description = "download results";
 }
 
 void DownloadResult::execute() {
-    Context& context = getCtx();
-    DefaultIO& defaultIo = getDio();
+    Context &context = getCtx();
+    DefaultIO &defaultIo = getDio();
     defaultIo.write("Enter path for results file: ");
     defaultIo.pure_write("RASV");
-    std::fstream readingFile(context.getClassifyName(), std::ios::out | std::ios::in | std::ios::trunc);
-    std::fstream WritingFile("results.txt", std::ios::out | std::ios::in | std::ios::trunc);
+    std::fstream readingFile(context.getClassifyName(), std::ios::in);
+    std::string results_path =  "Thread" + std::to_string(pthread_self()) + "results.txt";
+    std::fstream writingFile(results_path,  std::ios::out | std::ios::in | std::ios::trunc);
     int lineNumber = 1;
-    while(!readingFile.eof()){
-        std::string classify;
-        getline(readingFile,classify);
+    std::string classify;
+    while (getline(readingFile, classify)) {
         std::string line = std::to_string(lineNumber) + " " + classify;
-        WritingFile << line << '\n';
+        writingFile << line << std::endl;
         lineNumber++;
     }
-    WritingFile << "Done.\n";
-    WritingFile.seekg(0,std::ios::beg);
-    defaultIo.sendFile(WritingFile,SocketIO::getFileSize("results.txt"));
+    writingFile.seekg(0, std::ios::beg);
+    defaultIo.sendFile(writingFile, SocketIO::getFileSize(results_path));
+    defaultIo.write("Upload Complete.");
+    std::remove(results_path.data());
     std::string param = defaultIo.read();
 }

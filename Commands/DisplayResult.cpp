@@ -9,11 +9,10 @@ DisplayResult::DisplayResult(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
 void DisplayResult::execute() {
     Context& context = getCtx();
     DefaultIO& defaultIo = getDio();
-    std::fstream readingFile(context.getClassifyName(), std::ios::out | std::ios::in | std::ios::trunc);
+    std::fstream readingFile(context.getClassifyName(), std::ios::in);
     int lineNumber = 1;
-    while(!readingFile.eof()){
-        std::string classify;
-        getline(readingFile,classify);
+    std::string classify;
+    while(getline(readingFile,classify)){
         std::string line = std::to_string(lineNumber) + " " + classify;
         defaultIo.write(line);
         lineNumber++;

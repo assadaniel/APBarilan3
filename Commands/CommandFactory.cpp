@@ -8,19 +8,26 @@
 #include "UploadUnclassified.h"
 #include "ClassifyData.h"
 #include "DisplayResult.h"
-CommandFactory::CommandFactory(Context &ctx, DefaultIO &dio): ctx(ctx), dio(dio) {
+#include "DownloadResult.h"
+#include "ConfusionMatrix.h"
+
+CommandFactory::CommandFactory(Context &ctx, DefaultIO &dio) : ctx(ctx), dio(dio) {
 
 }
 
-Command *CommandFactory::createCommand(const std::string& string) const {
+Command *CommandFactory::createCommand(const std::string &string) const {
     if (string == "AlgoSettings") {
         return new AlgoSettings(ctx, dio);
-    } else if(string == "UploadUnclassified") {
-        return new UploadUnclassified(ctx,dio);
-    } else if(string == "ClassifyData"){
-        return new ClassifyData(ctx,dio);
-    } else if(string == "DisplayResult"){
-        return new DisplayResult(ctx,dio);
+    } else if (string == "UploadUnclassified") {
+        return new UploadUnclassified(ctx, dio);
+    } else if (string == "ClassifyData") {
+        return new ClassifyData(ctx, dio);
+    } else if (string == "DisplayResult") {
+        return new DisplayResult(ctx, dio);
+    } else if (string == "DownloadResult") {
+        return new DownloadResult(ctx, dio);
+    } else if (string == "ConfusionMatrix") {
+        return new ConfusionMatrix(ctx, dio);
     } else {
         std::string s = "Command " + string + "not found.";
         perror(s.c_str());

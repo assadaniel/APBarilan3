@@ -3,7 +3,7 @@
 
 
 #include "Command.h"
-#include "KSmallestRun.h"
+#include "KSmallestAlgo/KSmallestRun.h"
 
 class DownloadResult : public Command {
 public:
