@@ -16,7 +16,7 @@ public:
     void sendFile(std::fstream& file_s, long file_size) override; //full file stream
     std::string read() override;
     void write(std::string str) override;
-
+    void pure_write(std::string str) override;
 };
 
 

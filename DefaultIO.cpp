@@ -12,6 +12,10 @@ void DefaultIO::writeEndString() {
     write(endString);
 }
 
+void DefaultIO::pure_write(std::string str){
+    write(str);
+}
+
 const std::string &DefaultIO::getEndString() const {
     return endString;
 }

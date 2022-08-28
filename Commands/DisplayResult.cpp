@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include "DisplayResult.h"
-
+#include <fstream>
 DisplayResult::DisplayResult(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
     description = "display results";
 }

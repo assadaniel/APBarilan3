@@ -11,6 +11,7 @@
 class ClientActions {
 private:
     SocketIO& socketIo;
+    std::string name = "results.txt";
 public:
     ClientActions(SocketIO& socketIo1);
     void read_and_send_file();
@@ -19,6 +20,7 @@ public:
     void receive_and_print();
     void exit_client();
     void do_action(const std::string& option);
+    void get_name();
 };
 
 

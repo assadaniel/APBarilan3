@@ -25,3 +25,7 @@ void SocketIOServer::write(std::string str) {
     socketIo.write("RAP"); // telling the client to receive and print.
     socketIo.write(str);
 }
+
+void SocketIOServer::pure_write(std::string str){
+    socketIo.write(str);
+}

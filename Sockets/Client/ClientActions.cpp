@@ -40,16 +40,22 @@ ClientActions::ClientActions(SocketIO &socketIo1) : socketIo(socketIo1) {
 
 }
 
+void ClientActions::get_name(){
+    getline(std::cin,name);
+}
+
 void ClientActions::do_action(const std::string& option) {
     if (option == "RASF") {
         read_and_send_file();
     } else if (option == "RF") {
-        receive_file("results.txt");
+        receive_file(name);
     } else if (option == "RAS") {
         read_and_send();
     } else if (option == "RAP") {
         receive_and_print();
-    } else {
+    } else if (option == "RASV") {
+        get_name();
+    }else {
         exit_client();
     }
 }
