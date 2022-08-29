@@ -13,7 +13,11 @@ void DownloadResult::execute() {
     DefaultIO &defaultIo = getDio();
     defaultIo.write("Enter path for results file: ");
     defaultIo.pure_write("RASV");
-    std::fstream readingFile(context.getClassifyName(), std::ios::in);
+    std::string classified = context.getClassifyName();
+    if(classified.empty()) {
+        defaultIo.write("Must classify data beforehand.");
+    }
+    std::fstream readingFile(classified, std::ios::in);
     std::string results_path =  "Thread" + std::to_string(pthread_self()) + "results.txt";
     std::fstream writingFile(results_path,  std::ios::out | std::ios::in | std::ios::trunc);
     int lineNumber = 1;

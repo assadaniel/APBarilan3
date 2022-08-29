@@ -32,7 +32,5 @@ DefaultIO &Command::getDio() const {
     return dio;
 }
 
-Command::~Command() {
-
-}
+Command::~Command() = default;
 

@@ -12,6 +12,7 @@ class UploadUnclassified : public Command {
 public:
     UploadUnclassified(Context& ctx, DefaultIO &dio);
     void execute() override;
+    static bool is_empty(std::fstream& pFile);
 };
 
 

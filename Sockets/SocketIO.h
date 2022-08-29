@@ -21,7 +21,7 @@ private:
 public:
     SocketIO(int client_sock);
     virtual ~SocketIO();
-    void receiveFile(std::fstream& file_s) override; // empty file stream
+    bool receiveFile(std::fstream& file_s) override; // empty file stream
     void sendFile(std::fstream& file_s, long file_size) override; //full file stream
     static long getFileSize(const std::string &filename);
     std::string read() override;

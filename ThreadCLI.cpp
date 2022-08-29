@@ -17,7 +17,7 @@ bool ThreadCLI::start_thread() {
     return valid;
 }
 
-void ThreadCLI::wait_for_thread_to_exit() {
+void ThreadCLI::wait_for_thread_to_exit() const {
     pthread_join(_thread, NULL);
 }
 

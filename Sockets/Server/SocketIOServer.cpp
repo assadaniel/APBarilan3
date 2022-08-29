@@ -6,9 +6,9 @@
 
 SocketIOServer::SocketIOServer(int client_sock): socketIo(client_sock) {}
 
-void SocketIOServer::receiveFile(std::fstream &file_s) {
+bool SocketIOServer::receiveFile(std::fstream &file_s) {
     socketIo.write("RASF"); // telling the client to read and send the file.
-    socketIo.receiveFile(file_s);
+    return socketIo.receiveFile(file_s);
 }
 
 void SocketIOServer::sendFile(std::fstream &file_s, long file_size) {

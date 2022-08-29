@@ -11,18 +11,24 @@
  * 
  * @param file_s The fstream we write to.
  */
-void SocketIO::receiveFile(std::fstream &file_s) {
+bool SocketIO::receiveFile(std::fstream &file_s) {
     char buffer[CHUNK_SIZE];
     int ret;
     receive_int(&ret);
+    if(ret<0) {
+        std::cout << "Received invalid file." << std::endl;
+        return false;
+    }
     size_t data;
     data = recv(client_sock, buffer, ret, 0);
     file_s.write(buffer, data);
     if (data < 0) {
         std::cout << "Server : Error receiving file." << std::endl;
+        return false;
     } else {
         std :: cout << "Received " << data << " bytes." << std::endl;
     }
+    return true;
 
 
 }

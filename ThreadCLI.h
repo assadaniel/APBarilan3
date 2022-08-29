@@ -20,7 +20,7 @@ private:
 public:
     ThreadCLI( DefaultIO& dio);
     bool start_thread();
-    void wait_for_thread_to_exit();
+    void wait_for_thread_to_exit() const;
     ~ThreadCLI();
 };
 

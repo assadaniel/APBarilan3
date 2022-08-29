@@ -24,7 +24,15 @@ void ConfusionMatrix::execute() {
     std::vector<irisType> predictedType;
     std::vector<int> countTypes(N, 0);
     std::string realClassName = context.getPathToTrain();
+    if(realClassName.empty()) {
+        defaultIo.write("Must upload train and test files beforehand.");
+        return;
+    }
     std::string predictedClassName = context.getClassifyName();
+    if(predictedClassName.empty()) {
+        defaultIo.write("Must classify data beforehand.");
+        return;
+    }
     std::fstream realClass(realClassName);
     std::string type;
     while (getline(realClass,type)) {

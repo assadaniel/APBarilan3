@@ -22,6 +22,7 @@ void *ServerTimer::accept(void *obj) {
     pthread_mutex_lock(&mutex);
     pthread_cond_signal(&condition);
     pthread_mutex_unlock(&mutex);
+    return NULL;
 }
 
 bool ServerTimer::start(int &cs) {

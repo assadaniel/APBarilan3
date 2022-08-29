@@ -9,7 +9,11 @@ DisplayResult::DisplayResult(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
 void DisplayResult::execute() {
     Context& context = getCtx();
     DefaultIO& defaultIo = getDio();
-    std::fstream readingFile(context.getClassifyName(), std::ios::in);
+    std::string classified = context.getClassifyName();
+    if(classified.empty()) {
+        defaultIo.write("Must classify data beforehand.");
+    }
+    std::fstream readingFile(classified, std::ios::in);
     int lineNumber = 1;
     std::string classify;
     while(getline(readingFile,classify)){

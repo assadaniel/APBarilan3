@@ -32,4 +32,5 @@ Command *CommandFactory::createCommand(const std::string &string) const {
         std::string s = "Command " + string + "not found.";
         perror(s.c_str());
     }
+    return nullptr;
 }
