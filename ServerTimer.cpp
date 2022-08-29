@@ -37,6 +37,8 @@ bool ServerTimer::start(int &cs) {
     if(wait_r == ETIMEDOUT) {
         cs = -1;
         pthread_cancel(t1);
+        void* res = PTHREAD_CANCELED;
+        pthread_join(t1, &res);
         pthread_mutex_unlock(&mutex);
         return false;
     }
