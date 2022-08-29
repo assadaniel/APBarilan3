@@ -29,5 +29,6 @@ void CLI::start() {
     std::remove(ctx.getPathToTest().data());
     std::remove(ctx.getPathToTrain().data());
     std::remove(ctx.getClassifyName().data());
+    dio.close();
     pthread_exit(0);
 }

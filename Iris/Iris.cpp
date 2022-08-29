@@ -27,7 +27,7 @@ Iris::Iris(const Iris &iris) {
     this->width = iris.width;
     this->sepalLength = iris.sepalLength;
     this->sepalWidth = iris.sepalWidth;
-    this->petalLength = iris.sepalLength;
+    this->petalLength = iris.petalLength;
     this->type = iris.type;
 }
 

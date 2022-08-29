@@ -13,7 +13,7 @@ void *ThreadCLI::start_function(void *obj) {
 }
 
 bool ThreadCLI::start_thread() {
-    valid =  (pthread_create(&_thread, &attr, start_function, this) == 0);
+    valid = (pthread_create(&_thread, &attr, start_function, this) == 0);
     return valid;
 }
 

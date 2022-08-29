@@ -29,3 +29,12 @@ void SocketIOServer::write(std::string str) {
 void SocketIOServer::pure_write(std::string str){
     socketIo.write(str);
 }
+
+void SocketIOServer::close() {
+    active = false;
+    socketIo.close();
+}
+
+bool SocketIOServer::is_active() const {
+    return active;
+}

@@ -17,6 +17,7 @@ public:
     virtual void receiveFile(std::fstream& file_s) = 0; // empty file stream
     virtual void sendFile(std::fstream& file_s, long file_size) = 0; //full file stream
     virtual void pure_write(std::string str);
+    virtual void close() = 0;
     void writeEndString();
     virtual ~DefaultIO();
 
