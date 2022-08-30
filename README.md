@@ -56,9 +56,9 @@ Welcome to the KNN Classifier Server. Please choose an option:
 6. display algorithm confusion matrix
 7. exit
 ```
-*1.* You will be asked to input the path for a train file and a test file, the train file will contain the true classes of the test file, this is needed to test the algorithms  
-accuaracy in option 6,
-The test file should look like this:
+*1.* You will be asked to input the path for a train file and a test file, the train file will contain the true classes of the test file, this is needed to test the   algorithms accuaracy in option 6,
+
+The test file should look like this:  
 ```
 4.6,3.1,1.5,0.2
 6.9,3.1,4.9,1.5
@@ -67,7 +67,7 @@ The test file should look like this:
 6.4,3.2,4.5,1.5
 4.7,3.2,1.3,0.2
 ```
-And the train file should look like this:
+And the train file should look like this:  
 ```
 Iris-setosa
 Iris-setosa
@@ -76,24 +76,24 @@ Iris-setosa
 Iris-versicolor
 Iris-setosa
 ```
-**THE TRAIN FILE DOESN'T CONTAIN NUMBERS, ONLY CLASSIFICATIONS**
-Keep in mind that these files should be in the client's working directory.
-(The exact format wasn't specified in the assignment).
-*2.* change the algorithm settings, You will be shown the current settings:
+**THE TRAIN FILE DOESN'T CONTAIN NUMBERS, ONLY CLASSIFICATIONS**  
+Keep in mind that these files should be in the client's working directory.    
+(The exact format wasn't specified in the assignment).  
+*2.* change the algorithm settings, You will be shown the current settings:  
 ```
 The current KNN parameters are: K = 5, distance metric = EUC
 ```
-and if for example you want to change it to use $k=3$ and a ```MAN``` metric, you need to input:
+and if for example you want to change it to use $k=3$ and a ```MAN``` metric, you need to input:  
 ```
 3 MAN
 ```
-if you don't want to change the settings, press ```enter``` and continue.
-*3.* This option classifies the test data. (Doesn't send it to you).
-*4.* This option shows you the results of the classification in the terminal screen (regular output).
-*5.* This option will ask you for a ```.txt``` file, and send the same data that is shown in option 4 to that file. 
-The file doesn't have to exist, it can be created for the client.
-*6.* This option prints the confusion matrix for classifier.
-*7.* Exit from the server.
+if you don't want to change the settings, press ```enter``` and continue.  
+*3.* This option classifies the test data. (Doesn't send it to you).  
+*4.* This option shows you the results of the classification in the terminal screen (regular output).  
+*5.* This option will ask you for a ```.txt``` file, and send the same data that is shown in option 4 to that file.  
+The file doesn't have to exist, it can be created for the client.  
+*6.* This option prints the confusion matrix for classifier.  
+*7.* Exit from the server.  
 
 
 
