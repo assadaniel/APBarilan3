@@ -5,6 +5,10 @@
 #include "ClientIO/SocketFileClient.h"
 #include "ClientActions.h"
 
+/**
+ * @brief Client main.
+ * 
+ */
 int main() {
     SocketFileClient SFC("127.0.0.1", 7777);
     SocketIO sIO(SFC.getClientSock());

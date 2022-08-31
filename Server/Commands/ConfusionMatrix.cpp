@@ -9,10 +9,20 @@
 
 #define N 3
 
+/**
+ * @brief Construct a new Confusion Matrix:: Confusion Matrix object.
+ * 
+ * @param ctx Things the command needs to know in order to work.
+ * @param dio DefaultIO used.
+ */
 ConfusionMatrix::ConfusionMatrix(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
     description = "display algorithm confusion matrix";
 }
 
+/**
+ * @brief Executing the command.
+ * 
+ */
 void ConfusionMatrix::execute() {
     Context &context = getCtx();
     DefaultIO &defaultIo = getDio();

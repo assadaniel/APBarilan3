@@ -5,16 +5,31 @@
 #include "ServerTimer.h"
 pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 pthread_cond_t condition = PTHREAD_COND_INITIALIZER;
+
+/**
+ * @brief The argst struct
+ * 
+ */
 typedef struct argst {
     void* object;
     int& cs;
 } argst;
 
-
+/**
+ * @brief Construct a new Server Timer:: Server Timer object.
+ * 
+ * @param SFS The socket file of the server.
+ */
 ServerTimer::ServerTimer(SocketFileServer &SFS): SFS(SFS){
     pthread_attr_init(&attr);
 }
 
+/**
+ * @brief Accepting and initializing the timer.
+ * 
+ * @param obj The object used in the struct.
+ * @return void* Returning null.
+ */
 void *ServerTimer::accept(void *obj) {
     argst* par = (argst*)obj;
     ServerTimer * s = (ServerTimer*)(par->object);
@@ -25,6 +40,13 @@ void *ServerTimer::accept(void *obj) {
     return NULL;
 }
 
+/**
+ * @brief Starting the timer.
+ * 
+ * @param cs The int used in the struct.
+ * @return true Checking if the timer has passed the timeout time.
+ * @return false Checking if the timer has passed the timeout time.
+ */
 bool ServerTimer::start(int &cs) {
     argst obj = {NULL, cs};
     obj.object = this;
@@ -50,6 +72,11 @@ bool ServerTimer::start(int &cs) {
 
 }
 
+/**
+ * @brief Getter for the seconds left.
+ * 
+ * @return int The seconds left.
+ */
 int ServerTimer::getSeconds() const {
     return seconds;
 }

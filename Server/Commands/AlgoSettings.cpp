@@ -7,12 +7,22 @@
 #include "AlgoSettings.h"
 #include "../GeneralServerResources/Context.h"
 
+/**
+ * @brief Construct a new Algo Settings:: Algo Settings object.
+ * 
+ * @param ctx Things the command needs to know in order to work.
+ * @param dio DefaultIO used.
+ */
 AlgoSettings::AlgoSettings(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
     instruction = "The current KNN parameters are: K = "+ std::to_string(ctx.getK())
                   +", distance metric = "+ctx.getDistanceMetric();
     description = "algorithm settings";
 }
 
+/**
+ * @brief Executing the command.
+ * 
+ */
 void AlgoSettings::execute() {
     Context& context = getCtx();
     DefaultIO& defaultIo = getDio();
@@ -41,6 +51,10 @@ void AlgoSettings::execute() {
 
 }
 
+/**
+ * @brief Changing the Instructions for later use.
+ * 
+ */
 void AlgoSettings::refreshInstruction() {
     Context& ctx = getCtx();
     instruction = "The current KNN parameters are: K = "+ std::to_string(ctx.getK())

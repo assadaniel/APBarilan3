@@ -32,6 +32,11 @@ SocketFileServer::SocketFileServer( const int port_no) : port_no(port_no) {
 
 }
 
+/**
+ * @brief Accepting the client.
+ * 
+ * @return int checking if the accept worked.
+ */
 int SocketFileServer::accept() {
     unsigned int addr_len = sizeof(client_sin);
     int cs = ::accept(server_sock, (struct sockaddr *) &client_sin, &addr_len);

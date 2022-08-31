@@ -3,10 +3,20 @@
 #include <functional>
 #include "ClassifyData.h"
 
+/**
+ * @brief Construct a new Classify Data:: Classify Data object/
+ * 
+ * @param ctx Things the command needs to know in order to work.
+ * @param dio DefaultIO used.
+ */
 ClassifyData::ClassifyData(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
     description = "classify data";
 }
 
+/**
+ * @brief Executing the command.
+ * 
+ */
 void ClassifyData::execute() {
     Context& context = getCtx();
     DefaultIO& defaultIo = getDio();
