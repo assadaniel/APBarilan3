@@ -90,7 +90,9 @@ and if for example you want to change it to use $k=3$ and a ```MAN``` metric, yo
 if you don't want to change the settings, press ```enter``` and continue.  
 *3.* This option classifies the test data. (Doesn't send it to you).  
 *4.* This option shows you the results of the classification in the terminal screen (regular output).  
+Press another space to exit it.  
 *5.* This option will ask you for a ```.txt``` file, and send the same data that is shown in option 4 to that file.  
+Press another space to exit it.  
 The file doesn't have to exist, it can be created for the client.  
 *6.* This option prints the confusion matrix for classifier.  
 *7.* Exit from the server.  
