@@ -6,10 +6,20 @@
 #include <iostream>
 #include "UploadUnclassified.h"
 
+/**
+ * @brief Construct a new Upload Unclassified:: Upload Unclassified object
+ * 
+ * @param ctx Things the command needs to know in order to work.
+ * @param dio DefaultIO used.
+ */
 UploadUnclassified::UploadUnclassified(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
     description = "upload an unclassified csv data file";
 }
 
+/**
+ * @brief Executing the command.
+ * 
+ */
 void UploadUnclassified::execute() {
     DefaultIO &defaultIo = getDio();
     Context &context = getCtx();

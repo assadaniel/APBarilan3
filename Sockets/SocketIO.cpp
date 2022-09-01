@@ -33,6 +33,7 @@ bool SocketIO::receiveFile(std::fstream &file_s) {
 
 }
 
+
 std::string SocketIO::read() {
 
     char buffer[CHUNK_SIZE];
@@ -53,6 +54,11 @@ std::string SocketIO::read() {
     return s;
 }
 
+/**
+ * @brief Writing to the client.
+ * 
+ * @param str The string needed to write.
+ */
 void SocketIO::write(std::string str) {
     send_int(str.size());
     int sent = send(client_sock, str.data(), str.size(), 0);

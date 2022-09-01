@@ -4,10 +4,20 @@
 #include "DownloadResult.h"
 #include "../../Sockets/SocketIO.h"
 
+/**
+ * @brief Construct a new Download Result:: Download Result object.
+ * 
+ * @param ctx Things the command needs to know in order to work.
+ * @param dio DefaultIO used.
+ */
 DownloadResult::DownloadResult(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
     description = "download results";
 }
 
+/**
+ * @brief Executing the command.
+ * 
+ */
 void DownloadResult::execute() {
     Context &context = getCtx();
     DefaultIO &defaultIo = getDio();

@@ -4,6 +4,13 @@
 
 #include <iostream>
 #include "CLI.h"
+
+/**
+ * @brief Construct a new CLI::CLI object.
+ * Adding all the commands to the command collection and setting the default context.
+ * 
+ * @param dio The defaultIO.
+ */
 CLI::CLI(DefaultIO& dio): ctx() ,dio(dio), commandCollection(dio,ctx) {
     ctx.setK(5);
     ctx.setDistanceMetric("EUC");
@@ -14,6 +21,11 @@ CLI::CLI(DefaultIO& dio): ctx() ,dio(dio), commandCollection(dio,ctx) {
     commandCollection.addCommand("DownloadResult");
     commandCollection.addCommand("ConfusionMatrix");
 }
+
+/**
+ * @brief Running the menu and executing the commands and closing everything after the user want to exit.
+ * 
+ */
 void CLI::start() {
     size_t exit = commandCollection.size() + 1;
     commandCollection.printMenu();

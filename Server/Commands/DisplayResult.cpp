@@ -2,10 +2,21 @@
 #include <iostream>
 #include "DisplayResult.h"
 #include <fstream>
+
+/**
+ * @brief Construct a new Display Result:: Display Result object.
+ * 
+ * @param ctx Things the command needs to know in order to work.
+ * @param dio DefaultIO used.
+ */
 DisplayResult::DisplayResult(Context &ctx, DefaultIO &dio) : Command(ctx, dio) {
     description = "display results";
 }
 
+/**
+ * @brief Executing the command.
+ * 
+ */
 void DisplayResult::execute() {
     Context& context = getCtx();
     DefaultIO& defaultIo = getDio();

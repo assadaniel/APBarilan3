@@ -11,10 +11,22 @@
 #include "DownloadResult.h"
 #include "ConfusionMatrix.h"
 
+/**
+ * @brief Construct a new Command Factory:: Command Factory object.
+ * 
+ * @param ctx The context.
+ * @param dio The defaultIO.
+ */
 CommandFactory::CommandFactory(Context &ctx, DefaultIO &dio) : ctx(ctx), dio(dio) {
 
 }
 
+/**
+ * @brief Creating a command using its name.
+ * 
+ * @param string The command name.
+ * @return Command* The command created.
+ */
 Command *CommandFactory::createCommand(const std::string &string) const {
     if (string == "AlgoSettings") {
         return new AlgoSettings(ctx, dio);

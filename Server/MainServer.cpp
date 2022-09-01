@@ -8,6 +8,11 @@
 // Created by User on 24/08/2022.
 //
 
+/**
+ * @brief Removing inactive sockets.
+ * 
+ * @param vSIO Vector of socketIOServer pointers.
+ */
 void remove_inactive_sockets(std::vector<SocketIOServer*>& vSIO) {
     for(int j = 0; j<vSIO.size();j++) {
         SocketIOServer* s = vSIO.at(j);
@@ -19,7 +24,10 @@ void remove_inactive_sockets(std::vector<SocketIOServer*>& vSIO) {
     }
 }
 
-
+/**
+ * @brief Server main.
+ * 
+ */
 int main() {
     int port = 7773;
     SocketFileServer SFS(port);
