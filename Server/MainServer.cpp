@@ -29,7 +29,7 @@ void remove_inactive_sockets(std::vector<SocketIOServer*>& vSIO) {
  * 
  */
 int main() {
-    int port = 7773;
+    int port = 7777;
     SocketFileServer SFS(port);
     std::vector<ThreadCLI *> thread_vector;
     std::vector<SocketIOServer*> vSIO;
