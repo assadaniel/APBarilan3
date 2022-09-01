@@ -9,7 +9,7 @@
 
 class KSmallestRun {
 public:
-    static void runKSmallest(int k, std::fstream& new_classified_stream, const std::string& unclassified_file_name,
+    static void runKSmallest(const std::string& classified_file_name, int k, std::fstream& new_classified_stream, const std::string& unclassified_file_name,
                              const std::function<double(const Iris, const Iris)>& distanceFunction);
 };
 

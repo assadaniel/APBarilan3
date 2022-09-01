@@ -13,9 +13,9 @@
  * @param new_classified_stream The file of the classified irises.
  * @param unclassified_file_name The file name of the unclassified irises we want to classifie.
  */
-void KSmallestRun::runKSmallest(int k, std::fstream& new_classified_stream, const std::string& unclassified_file_name,
+void KSmallestRun::runKSmallest(const std::string& classified_file_name, int k, std::fstream& new_classified_stream, const std::string& unclassified_file_name,
                                 const std::function<double(const Iris, const Iris)>& distanceFunction) {
-    IrisReader classifiedIrisReader("classified.csv"); // name of classified file
+    IrisReader classifiedIrisReader(classified_file_name); // name of classified file
     Iris cIris;
     std::vector<Iris> classifiedIrises;
     while (classifiedIrisReader.getNextIris(cIris)) { classifiedIrises.push_back(cIris); }

@@ -17,5 +17,6 @@ private:
 public:
     IrisReader(const std::string& fileName);
     bool getNextIris(Iris& iris);
+    void close();
 };
 #endif //T1_IRISREADER_HPP

@@ -40,4 +40,8 @@ bool IrisReader ::getNextIris(Iris& iris) {
     return false;
 }
 
+void IrisReader::close() {
+    fin.close();
+}
+
 

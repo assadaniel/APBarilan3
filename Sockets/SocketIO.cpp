@@ -14,20 +14,26 @@
 bool SocketIO::receiveFile(std::fstream &file_s) {
     char buffer[CHUNK_SIZE];
     int ret;
+    long sum = 0;
     receive_int(&ret);
     if(ret<0) {
         std::cout << "Received invalid file." << std::endl;
         return false;
     }
     size_t data;
-    data = recv(client_sock, buffer, ret, 0);
-    file_s.write(buffer, data);
-    if (data < 0) {
-        std::cout << "Server : Error receiving file." << std::endl;
-        return false;
-    } else {
-        std :: cout << "Received " << data << " bytes." << std::endl;
+    while(ret>0) {
+        int receiving = (CHUNK_SIZE<ret) ? CHUNK_SIZE:ret;
+        data = recv(client_sock, buffer, receiving, 0);
+        file_s.write(buffer, data);
+        if (data < 0) {
+            std::cout << "Server : Error receiving file." << std::endl;
+            return false;
+        } else {
+            sum += data;
+        }
+        ret-=data;
     }
+    std::cout << "Received " << sum << " bytes." << std::endl;
     return true;
 
 
@@ -79,14 +85,21 @@ void SocketIO::sendFile(std::fstream &file_s, long file_size) {
     size_t sent = 0;
     std::string line;
     send_int(file_size);
+    long left = file_size;
+    long sum = 0;
     char buffer[CHUNK_SIZE];
-    file_s.read(buffer, file_size);
-    sent = send(client_sock, buffer, file_size, 0);
-    if (sent < 0) {
-        std::cout << "Server : Error sending file." << std::endl;
-    } else {
-        std :: cout << "Sent " << sent << " bytes." << std::endl;
+    while(left > 0) {
+        long sending = (CHUNK_SIZE<left)? CHUNK_SIZE: left;
+        file_s.read(buffer, sending);
+        sent = send(client_sock, buffer, sending, 0);
+        if (sent < 0) {
+            std::cout << "Server : Error sending file." << std::endl;
+        } else {
+            sum += sent;
+        }
+        left -= sent;
     }
+    std::cout << "Sent " << sum << " bytes." << std::endl;
 }
 
 /**

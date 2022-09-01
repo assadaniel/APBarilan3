@@ -37,7 +37,8 @@ void ClassifyData::execute() {
     } else {
         distanceFunction = chebDistance;
     }
-    KSmallestRun::runKSmallest(context.getK() ,new_classified ,path_to_test, distanceFunction);
+    std::string train_name = context.getPathToTrain();
+    KSmallestRun::runKSmallest(train_name, context.getK() ,new_classified ,path_to_test, distanceFunction);
     defaultIo.write("Classified data successfully.");
     new_classified.close();
 }

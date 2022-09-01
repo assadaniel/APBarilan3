@@ -4,6 +4,8 @@
 #include "ConfusionMatrix.h"
 #include <unordered_map>
 #include "../Iris/Iris.hpp"
+#include "../Iris/IrisReader.hpp"
+#include "../KSmallestAlgo/KSmallestRun.h"
 #include <cmath>
 #include <fstream>
 
@@ -33,22 +35,33 @@ void ConfusionMatrix::execute() {
     std::vector<irisType> realType;
     std::vector<irisType> predictedType;
     std::vector<int> countTypes(N, 0);
+    std::string train_name = context.getPathToTrain();
+    std::string new_classified_predicted = "Thread" + std::to_string(pthread_self()) +"new_classified_train.csv";
+    std::fstream new_classified_trained(new_classified_predicted,std::ios::out | std::ios::in | std::ios::trunc);
+    std::function<double(const Iris, const Iris)> distanceFunction;
+    std::string dm = context.getDistanceMetric();
+    if (dm == "EUC") {
+        distanceFunction = eucDistance;
+    } else if (dm == "MAN") {
+        distanceFunction = manDistance;
+    } else {
+        distanceFunction = chebDistance;
+    }
+    KSmallestRun::runKSmallest(train_name,context.getK(), new_classified_trained, train_name, distanceFunction);
+    new_classified_trained.close();
     std::string realClassName = context.getPathToTrain();
     if(realClassName.empty()) {
         defaultIo.write("Must upload train and test files beforehand.");
         return;
     }
-    std::string predictedClassName = context.getClassifyName();
-    if(predictedClassName.empty()) {
-        defaultIo.write("Must classify data beforehand.");
-        return;
+
+    IrisReader realClass(realClassName);
+    Iris some_iris;
+    while (realClass.getNextIris(some_iris)) {
+        realType.push_back(some_iris.getType());
     }
-    std::fstream realClass(realClassName);
+    std::fstream predictedFstream(new_classified_predicted);
     std::string type;
-    while (getline(realClass,type)) {
-        realType.push_back(table[type]);
-    }
-    std::fstream predictedFstream(predictedClassName);
     while (getline(predictedFstream,type)) {
         predictedType.push_back(table[type]);
     }
@@ -81,4 +94,5 @@ void ConfusionMatrix::execute() {
         confMatrix += "\n";
     }
     defaultIo.write(confMatrix);
+    std::remove(new_classified_predicted.data());
 }
