@@ -24,13 +24,6 @@ void UploadUnclassified::execute() {
         context.setPathToTrain("");
         train_f.close();
         return;
-    }
-    train_f.seekg(0, std::ios::beg);
-    if (is_empty(train_f)) {
-        defaultIo.write("File sent was empty, please send a file with content.");
-        context.setPathToTrain("");
-        train_f.close();
-        return;
     } else { defaultIo.write("Upload complete."); }
     defaultIo.write("Please upload your local test CSV file.");
     context.setPathToTest("Thread" + std::to_string(pthread_self()) + "testCSVfile_server_receving.csv");
@@ -42,20 +35,12 @@ void UploadUnclassified::execute() {
         train_f.close();
         context.setPathToTest("");
         return;
-    }
-    test_f.seekg(0, std::ios::beg);
-    if (is_empty(test_f)) {
-        defaultIo.write("The file sent was empty, please send a file with content.");
-        context.setPathToTest("");
-        train_f.close();
-        test_f.close();
-        return;
     } else { defaultIo.write("Upload complete."); }
     train_f.close();
     test_f.close();
 }
 
-//From stack overflow: https://stackoverflow.com/questions/2390912/checking-for-an-empty-file-in-c
-bool UploadUnclassified::is_empty(std::fstream &pFile) {
-    return pFile.peek() == std::ifstream::traits_type::eof();
-}
+////From stack overflow: https://stackoverflow.com/questions/2390912/checking-for-an-empty-file-in-c
+//bool UploadUnclassified::is_empty(std::fstream &pFile) {
+//    return pFile.peek() == std::ifstream::traits_type::eof();
+//}

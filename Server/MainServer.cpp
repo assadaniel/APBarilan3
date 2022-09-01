@@ -21,17 +21,15 @@ void remove_inactive_sockets(std::vector<SocketIOServer*>& vSIO) {
 
 
 int main() {
-    int port = 7777;
+    int port = 7773;
     SocketFileServer SFS(port);
-    bool listening = true;
     std::vector<ThreadCLI *> thread_vector;
     std::vector<SocketIOServer*> vSIO;
     bool resume_server = true;
-    for (int i = 0; i < 4; i++) { //need to do server timeout.
+    while(true) { //need to do server timeout.
         remove_inactive_sockets(vSIO);
         ServerTimer serverTimer(SFS);
         int client_sock;
-        std::cout << "The size of the vector is " << vSIO.size() << std::endl;
         resume_server = serverTimer.start(client_sock);
         if (vSIO.empty() && !resume_server) {
             std::cout << "Server timeout : No clients for " << serverTimer.getSeconds() << " seconds." << std::endl;

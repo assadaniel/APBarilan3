@@ -26,6 +26,7 @@ IrisReader ::IrisReader(const std::string& fileName) : fin(fileName){
  * @return Returning true if there is another line to read from, and false otherwise.
  */
 bool IrisReader ::getNextIris(Iris& iris) {
+    iris.clear();
     row.clear(); // clear the vector
     std::string line, word;
     if (getline(fin, line)) {
