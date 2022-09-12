@@ -5,7 +5,7 @@
 The server is currently meant to implement the KNN algorithm with iris types, for a given unclassified iris, we find its *K CLOSEST NEIGHBOURS* in $O\left(n\right)$ and from them determine its type,
 using the following three different types of irises: *setosa*, *virgincia*, *versicolor*. 
 ## Threads and server timeout
-The server uses threads in order to support more than one client at once, additionaly if no clients are connected for 1-2 minutes, the server will shutdown.
+The server uses threads in order to support more than one client at once (with a max of 5 according to the ```listen()``` function, additionaly if no clients are connected for 1-2 minutes, the server will shutdown.
 ## Run the code
 ### Requirements
 The client will have a test file which is unclassified and a train file which is classified in his working directory.
