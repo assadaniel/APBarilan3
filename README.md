@@ -5,12 +5,11 @@
 The server is currently meant to implement the KNN algorithm with iris types, for a given unclassified iris, we find its *K CLOSEST NEIGHBOURS* in $O\left(n\right)$ and from them determine its type,
 using the following three different types of irises: *setosa*, *virgincia*, *versicolor*. 
 ## Threads and server timeout
-The server uses threads in order to support more than one client at once, additionaly if no clients are connected for 1-2 minutes, the server will shutdown.
+The server uses threads in order to support more than one client at once (with a max of 5 according to the ```listen()``` function, additionaly if no clients are connected for 1-2 minutes, the server will shutdown.
 ## Run the code
 ### Requirements
-
-
-The server should have a file ```classified.csv``` in it's working directory full of classified Iris, which contains in each line $5$ columns, for example, the contents of the file should look like this:  
+The client will have a test file which is unclassified and a train file which is classified in his working directory.
+An example for a train file:
 ```
 5.4,3.9,1.7,0.4,Iris-versicolor
 4.6,3.4,1.4,0.3,Iris-setosa
@@ -22,9 +21,9 @@ The numbers in each column correspond to a feature of the iris:
 3. The iris's sepal width
 4. The iris' petal length
 5. The iris' type, from the types stated above.  
+The client could also send data with more dimensions than only 4.
   
   
-The client must also have a file ```Unclassified.csv``` which contains the same contents as the ```classified.csv``` file, but it misses the type column (or the fifth column), thus making it a file of "unclassified" irises, this is the file we want to classify.
 
 ### Compile and run
 The project has a given ```Makefile``` for you to use when compiling the code.
@@ -69,16 +68,14 @@ The test file should look like this:
 ```
 And the train file should look like this:  
 ```
-Iris-setosa
-Iris-setosa
-Iris-virginica
-Iris-setosa
-Iris-versicolor
-Iris-setosa
+5.4,3.9,1.7,0.4,Iris-setosa
+4.6,3.4,1.4,0.3,Iris-setosa
+5.0,3.4,1.5,0.2,Iris-setosa
+4.4,2.9,1.4,0.2,Iris-setosa
+4.9,3.1,1.5,0.1,Iris-setosa
+5.4,3.7,1.5,0.2,Iris-setosa
 ```
-**THE TRAIN FILE DOESN'T CONTAIN NUMBERS, ONLY CLASSIFICATIONS**  
 Keep in mind that these files should be in the client's working directory.    
-(The exact format wasn't specified in the assignment).  
 *2.* change the algorithm settings, You will be shown the current settings:  
 ```
 The current KNN parameters are: K = 5, distance metric = EUC
@@ -95,12 +92,13 @@ Press another space to exit it.
 Press another space to exit it.  
 The file doesn't have to exist, it can be created for the client.  
 *6.* This option prints the confusion matrix for classifier.  
+It classifies the number in the train file, and compares them to their classifications.
 *7.* Exit from the server.  
 
 
 
 ### Files in working directories
-You must have a ```classified.csv``` file in the server's working directory and both the train and test files in the client's working directory.
+You must both the train and test files in the client's working directory.
 
 
 
