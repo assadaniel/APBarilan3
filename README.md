@@ -33,7 +33,7 @@ make server
 ```
 and to run it:
 ```
-./server
+./serverrun
 ```
 And the same goes for the client, run this client command after you've run the server command (and while it's running):
 ```
@@ -41,7 +41,7 @@ make client
 ```
 and to run it:
 ```
-./client 
+./clientrun  
 ```
 ***In Linux.***    
 After running the client, the client will be presented with a menu, like so:
